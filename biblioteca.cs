@@ -4,15 +4,13 @@ class Biblioteca{
 //Declaração dos Atributos
 	private string nome;
 	private string cep;
-	private Usuario[] usuarios;
-	private Livro[] livros;
+	private Usuario[] usuarios = new Usuario[50];
+	private Livro[] livros = new Livro [50];
 	
 //Construtores
-	public Biblioteca(string n, string c, Usuario[] user, Livro [] liv){
+	public Biblioteca(string n, string c){
 		this.nome = n;
 		this.cep = c;
-		this.usuarios = user;
-		this.livros = liv;
 	}
 	public Biblioteca(){
 		this.nome = "";
@@ -25,7 +23,9 @@ class Biblioteca{
 	public void setNome(string n){
 		nome = n;
 	}
-
+	public void setUsuario(Usuario user){
+		usuarios[0] = user;
+	}
 
 	public string getCep(){
 		return cep;
@@ -33,7 +33,16 @@ class Biblioteca{
 	public void setCep(string c){
 		cep = c;
 	}
-
-	
-	
+	//Métodos Funcionais
+	public void RealizarCadastro(Usuario user){
+		for(int x=0;x < usuarios.Length;x++){
+			if(usuarios[x] == null){
+				usuarios[x] = user;
+				Console.WriteLine("Adicionou");
+				break;
+			}
+			
+		}
+				
+	}
 }

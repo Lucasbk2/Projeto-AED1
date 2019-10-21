@@ -9,11 +9,10 @@ class Usuario{
 	private Livro[] livros;
 
 	//Construtores
-	public Usuario(string n, int i, string c,Livro[] liv){
+	public Usuario(string n, int i, string c){
 		this.nome = n;
 		this.idade = i;
 		this.cpf = c;
-		this.livros = liv;
 	}
  
 	public Usuario(){
