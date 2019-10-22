@@ -5,6 +5,8 @@ class Usuario{
 	//Declaração dos Metódos
 	private string nome;
 	private int idade;
+	private string senha;
+	private bool logado;
 	private string cpf;
 	private Livro[] livros;
 
@@ -13,12 +15,14 @@ class Usuario{
 		this.nome = n;
 		this.idade = i;
 		this.cpf = c;
+		this.logado = false;
 	}
  
 	public Usuario(){
 		this.nome = "";
 		this.idade = 0;
 		this.cpf = "";
+		this.logado = false;
 	}
 
 	//Métodos get/set
@@ -29,7 +33,6 @@ class Usuario{
 		nome = n;
 	}
 
-
 	public int getIdade(){
 		return idade;
 	}
@@ -37,13 +40,20 @@ class Usuario{
 		idade = i;
 	}
 
-
 	public string getCpf(){
 		return cpf;
 	}
 	public void setCpf(string c){
 		cpf = c;
 	}
+	
+	public bool getLogado(){
+		return logado;
+	}
+	public void setLogado(bool b){
+		logado = b;
+	}
+	//Métodos Funcionais
 
 
-}
+	}

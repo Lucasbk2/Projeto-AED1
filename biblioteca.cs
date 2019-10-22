@@ -43,6 +43,17 @@ class Biblioteca{
 			}
 			
 		}
-				
 	}
+		public bool AutentificarUsuario(string nome){	
+
+			for(int x=0; x< usuarios.Length;x++){
+				if(usuarios[x].getNome() == nome){
+					return true;
+			}
+			}
+			
+		return false;
+
+		
+		}
 }
