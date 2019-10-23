@@ -8,7 +8,7 @@ class Usuario{
 	private string senha;
 	private bool logado;
 	private string cpf;
-	private Livro[] livros;
+	private Livro[] livrosUsuario = new Livro [3];
 
 	//Construtores
 	public Usuario(string n, int i, string c){
