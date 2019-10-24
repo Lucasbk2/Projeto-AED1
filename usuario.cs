@@ -57,10 +57,12 @@ class Usuario{
 		this.logado = b;
 	}
 	//Métodos Funcionais
-	//bi.getLivros()[x].getNome()
 	public string AlugarLivro(string livroSelecionado, Biblioteca bi){
 		for(int x=0;x<bi.getLivros().Length;x++){
 			if(livroSelecionado == bi.getLivros()[x].getNome()){
+				if (bi.getLivros()[x].VerificarClassificacao(bi.getUsuarioLogado().getIdade()) == false){
+				return "O Usuario não possui idade para alugar este livro";
+				}
 				for(int y=0;y<livrosUsuario.Length;y++){
 					if(livrosUsuario[y] == null){
 						livrosUsuario[y] = bi.getLivros()[x];

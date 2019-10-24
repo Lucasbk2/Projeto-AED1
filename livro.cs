@@ -56,5 +56,28 @@ class Livro{
 	public void setFaixa_etaria(int f){
 		faixa_etaria = f;
 	}
+	//Métodos Funcionais
+	public string AlterarFaixaEtaria(int idade){
+		faixa_etaria = idade; 
+		return "Faixa Etária alterada com sucesso";
 
+
+
+
+	}
+	public bool VerificarClassificacao(int idade){
+		if (idade >= faixa_etaria){
+			return true;
+		}
+		return false;
+
+	}
+	public void MostrarDescricao(string nomeLivro, Biblioteca biblio){
+		Console.WriteLine("---Descrição do Livro---");
+		Console.WriteLine("Nome : "+nome);
+		Console.WriteLine("Gênero: "+genero);
+		Console.WriteLine("Autor: "+autor);
+		Console.WriteLine("Faixa Etária: "+faixa_etaria);
+
+	}
 }
