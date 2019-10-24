@@ -1,4 +1,7 @@
 using System;
+using System.IO;
+using System.Text;
+
 
 class Usuario{
 
@@ -51,9 +54,49 @@ class Usuario{
 		return logado;
 	}
 	public void setLogado(bool b){
-		logado = b;
+		this.logado = b;
 	}
 	//Métodos Funcionais
+	//bi.getLivros()[x].getNome()
+	public string AlugarLivro(string livroSelecionado, Biblioteca bi){
+		for(int x=0;x<bi.getLivros().Length;x++){
+			if(livroSelecionado == bi.getLivros()[x].getNome()){
+				for(int y=0;y<livrosUsuario.Length;y++){
+					if(livrosUsuario[y] == null){
+						livrosUsuario[y] = bi.getLivros()[x];
+						bi.getLivros()[x] = null;
+						return "Livro adicionado";
+					}
 
+				}
+			}
+				
+		}
+		return "Livro não adicionado";
+	}
+
+	public void MostrarLivrosUsuario(){
+		for(int x=0;x<livrosUsuario.Length;x++){
+			if(livrosUsuario[x] != null){
+				Console.WriteLine(livrosUsuario[x].getNome());
+			}
+		}
+	}
+	public string DevolverLivro(string nomeLivro,Biblioteca bi){
+		for(int x=0;x<livrosUsuario.Length;x++){
+			if(nomeLivro == livrosUsuario[x].getNome()){
+				Console.WriteLine("Livro encontrado");
+				for(int y=0;y<bi.getLivros().Length;y++){
+					if(bi.getLivros()[x] == null){
+						bi.getLivros()[y] =livrosUsuario[x];
+						livrosUsuario[x]=null;
+						return "Livro adicionado";
+					}
+				} 
+
+			}
+		}
+		return "Livro não encontrado";
 
 	}
+}
