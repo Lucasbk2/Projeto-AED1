@@ -56,15 +56,14 @@ class Livro{
 	public void setFaixa_etaria(int f){
 		faixa_etaria = f;
 	}
+	
 	//Métodos Funcionais
 	public string AlterarFaixaEtaria(int idade){
 		faixa_etaria = idade; 
 		return "Faixa Etária alterada com sucesso";
 
-
-
-
 	}
+
 	public bool VerificarClassificacao(int idade){
 		if (idade >= faixa_etaria){
 			return true;
@@ -72,12 +71,27 @@ class Livro{
 		return false;
 
 	}
+	public void MostrarLivros(){
+		FileStream leituraArquivo = new FileStream("dadosLivro.txt",FileMode.Open,FileAccess.Read);
+		
+		StreamReader sr = new StreamReader(leituraArquivo,Encoding.UTF8);
+
+		while(!sr.EndOfStream){
+			string str = sr.ReadLine();
+			Console.WriteLine(str);
+		}
+		sr.Close();
+		leituraArquivo.Close();
+	}
 	public void MostrarDescricao(string nomeLivro, Biblioteca biblio){
-		Console.WriteLine("---Descrição do Livro---");
-		Console.WriteLine("Nome : "+nome);
-		Console.WriteLine("Gênero: "+genero);
-		Console.WriteLine("Autor: "+autor);
-		Console.WriteLine("Faixa Etária: "+faixa_etaria);
+		Console.WriteLine("---------------------------------------");
+		Console.WriteLine("----------Descrição do Livro-----------");
+		Console.WriteLine("| Nome : "+nome);
+		Console.WriteLine("| Gênero: "+genero);
+		Console.WriteLine("| Autor: "+autor);
+		Console.WriteLine("| Faixa Etária: "+faixa_etaria);
+		Console.WriteLine("---------------------------------------");
 
 	}
+	
 }

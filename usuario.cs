@@ -8,7 +8,6 @@ class Usuario{
 	//Declaração dos Metódos
 	private string nome;
 	private int idade;
-	private string senha;
 	private bool logado;
 	private string cpf;
 	private Livro[] livrosUsuario = new Livro [3];
@@ -58,16 +57,23 @@ class Usuario{
 	}
 	//Métodos Funcionais
 	public string AlugarLivro(string livroSelecionado, Biblioteca bi){
+		int numLivros = 0;
 		for(int x=0;x<bi.getLivros().Length;x++){
 			if(livroSelecionado == bi.getLivros()[x].getNome()){
 				if (bi.getLivros()[x].VerificarClassificacao(bi.getUsuarioLogado().getIdade()) == false){
 				return "O Usuario não possui idade para alugar este livro";
 				}
 				for(int y=0;y<livrosUsuario.Length;y++){
+					numLivros += 1;
+						if(numLivros == 3){
+							return "O Usuario pode possuir no maximo 3 livros";
+						}
 					if(livrosUsuario[y] == null){
+						
+
 						livrosUsuario[y] = bi.getLivros()[x];
 						bi.getLivros()[x] = null;
-						return "Livro adicionado";
+						return "-> Livro Alugado";
 					}
 
 				}

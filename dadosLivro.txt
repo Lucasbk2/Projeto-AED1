@@ -1,1 +1,3 @@
-﻿
+﻿livro1;genero1;autor1;1
+livro2;genero2;autor2;2
+livro3;genero3;autor3;3

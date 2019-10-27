@@ -22,16 +22,23 @@ class MainClass {
 	
 		bool condicao = false;
 		while ( condicao == false){
-			Console.WriteLine("Deseja realizar login(1), cadastro(2) ou sair(3): ");
+			Console.WriteLine("---------------------------------------");
+			Console.WriteLine("| 1 - Login | 2 - Cadastro | 3 - Sair |");
+			Console.Write("---------------------------------------\n-> ");
 			int login = int.Parse(Console.ReadLine());
 
 			//usuario.Login();
 			if(login == 1){
 				Console.WriteLine("Login");
-				Console.WriteLine("Digite seu nome:");
+				Console.WriteLine("");
+				Console.WriteLine("---------------------------------------");
+				Console.Write("| Digite seu nome: ");
 				string senha = Console.ReadLine();
+				Console.Write("| Digite seu CPF: ");
+				string cep = Console.ReadLine();
+				Console.WriteLine("---------------------------------------");
 				
-				if (biblio.AutentificarUsuario(senha) == true){
+				if (biblio.AutentificarUsuario(senha,cep) == true){
 					condicao = true;					
 				}
 				else{
@@ -43,22 +50,26 @@ class MainClass {
 				if (login == 2){
 					//usuario.CadastrarUsuario();
 					Console.WriteLine("Cadastro");
-					Console.WriteLine("Digite seu nome: ");
+					Console.WriteLine("");
+					Console.WriteLine("---------------------------------------");
+					Console.Write("| Digite seu nome: ");
 					string nome = Console.ReadLine();
 					
-					Console.WriteLine("Digite sua idade: ");
+					Console.Write("| Digite sua idade: ");
 					int idade = int.Parse(Console.ReadLine());
-
-					Console.WriteLine("Digite seu CPF: ");
+					
+					Console.Write("| Digite seu CPF: ");
 					string cpf = Console.ReadLine();
+					Console.WriteLine("---------------------------------------");
 					Usuario user = new Usuario(nome,idade,cpf);
 					//biblio.setUsuario(user);
-					biblio.RealizarCadastro(user);					
+					biblio.RealizarCadastro(user);
+					Console.WriteLine("");					
 				}
 				if (login ==3){
 					return false;
 				}
-				else{
+				if(login < 1  || login >3){
 					Console.WriteLine("Comando inválido");
 				}
 			}
@@ -71,61 +82,106 @@ class MainClass {
 		Console.WriteLine(biblio.getUsuarioLogado().getNome());
 		bool condicao = true;
 		while ( condicao == true){
-			Console.WriteLine("Deseja Alugar um livro(1), Buscar um livro(2),Ver seus livros(3) , devolver um livro(4), doar livro para a biblioteca(5)ver a descrição de um livro ou deslogar(7):");
+			Console.WriteLine("");
+			Console.Write("---------------------------------------");
+			Console.Write("\n| 1 - Alugar Livro \n| 2 - Buscar Livro \n| 3 - Livros Alugados \n| 4 - Devolver Livro \n| 5 - Adicionar Livro \n| 6 - Ver Descrição \n| 7 - Alterar Faixa Etária \n| 8 - Deslogar \n");
+			Console.WriteLine("---------------------------------------");
+			Console.Write("-> ");
 			int decisao = int.Parse(Console.ReadLine());
-
+			Console.WriteLine("");
+			
+ 
 			switch (decisao){
 
 				case 1:
+				Console.WriteLine("---------------------------------------");
 				Console.WriteLine("Digite o nome do livro no qual deseja alugar: ");
 				string nomeLivroAlugar= Console.ReadLine();
 				Console.WriteLine(biblio.getUsuarioLogado().AlugarLivro(nomeLivroAlugar,biblio));
+				Console.WriteLine("---------------------------------------");
 				break;
 
 				case 2:
+				Console.WriteLine("---------------------------------------");
 				Console.WriteLine("Livros Disponíveis para alugar:");
 				biblio.MostrarLivros();
+				Console.WriteLine("---------------------------------------");
 
 				break;
 
 				case 3:
+				Console.WriteLine("---------------------------------------");
 				Console.WriteLine("Os livros que voçê possui são :");
 				biblio.getUsuarioLogado().MostrarLivrosUsuario();
+				Console.WriteLine("---------------------------------------");
 				break;
 
 				case 4:
+				Console.WriteLine("---------------------------------------");
 				Console.WriteLine("Qual o nome no livro que deseja devolver: ");
 				string livroDevolver = Console.ReadLine();
 				biblio.getUsuarioLogado().DevolverLivro(livroDevolver,biblio);
+				Console.WriteLine("---------------------------------------");
 				break;
 
 				case 5: // Adicionar livro
-				Console.WriteLine("Para doar o livro insira os dados: ");
-				Console.WriteLine("Digite o nome do livro ");
+				Console.WriteLine("---------------------------------------");
+				Console.WriteLine("Para adicionar o livro a biblioteca insira os dados: ");
+				Console.WriteLine("---------------------------------------");
+				Console.Write("| Digite o nome do livro: ");
 				string nomeLivro = Console.ReadLine();
-				Console.WriteLine("Digite o gênero do livro");
+				Console.WriteLine("---------------------------------------");
+				Console.Write("| Digite o gênero do livro: ");
 				string genero = Console.ReadLine();
-				Console.WriteLine("Digite o autor do livro ");
+				Console.WriteLine("---------------------------------------");
+				Console.Write("| Digite o autor do livro: ");
 				string autor = Console.ReadLine();
-				Console.WriteLine("Digite a faixa etária do livro ");
+				Console.WriteLine("---------------------------------------");
+				Console.Write("| Digite a faixa etária do livro: ");
 				int faixa = int.Parse(Console.ReadLine());
+				Console.WriteLine("---------------------------------------");
 				Livro livro = new Livro(nomeLivro,genero,autor,faixa);
 				biblio.AdicionarLivro(livro);
+				
 				break;
 
 				case 6:
-				Console.WriteLine("Digite o nome do livro no qual deseja obter uma melhor descrição ");
+				Console.WriteLine("---------------------------------------");
+				Console.WriteLine("Informe o nome do Livro: ");
 				string descr = Console.ReadLine();
-				//biblio.getLivros()(MostrarDescricao(descr,biblio));
-
-
+				for(int i = 0;i < biblio.getLivros().Length;i++ ){
+					if (biblio.getLivros()[i] != null){
+						if (biblio.getLivros()[i].getNome() == descr){
+							biblio.getLivros()[i].MostrarDescricao(descr,biblio);
+						}
+					}	
+				}
+				Console.WriteLine("---------------------------------------");
 				break;
 				
 				case 7:
-				bool b = false;
+				Console.WriteLine("---------------------------------------");
+				Console.WriteLine("Digite o nome do livro no qual deseja mudar a faixa etária: ");
+				string livroNf = Console.ReadLine();
+				for(int y = 0;y < biblio.getLivros().Length;y++ ){
+					if (biblio.getLivros()[y] != null){
+						if (biblio.getLivros()[y].getNome() == livroNf){
+							Console.WriteLine("Qual a nova faixa etário desejada: ");
+							int novaFaixa = int.Parse(Console.ReadLine());
+							biblio.getLivros()[y].AlterarFaixaEtaria(novaFaixa);
+						}
+					}	
+				}
+				Console.WriteLine("---------------------------------------");
+				break;
+
+				case 8:
+				Console.WriteLine("---------------------------------------");
 				biblio.getUsuarioLogado().setLogado(false);
 				condicao = false;
+				Console.WriteLine("---------------------------------------");
 				break;
+				
 			}
 		}
 	}

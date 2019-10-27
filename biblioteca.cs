@@ -59,17 +59,17 @@ class Biblioteca{
 		for(int x=0;x < usuarios.Length;x++){
 			if(usuarios[x] == null){
 				usuarios[x] = user;
-				Console.WriteLine("Adicionou");
+				Console.WriteLine("-> Cadastro Realizado");
 				break;
 			}
 		}
 	}
 
-	public bool AutentificarUsuario(string nome){	
+	public bool AutentificarUsuario(string nome,string oCep){	
 
 		for(int x=0; x< usuarios.Length;x++){
 			if(usuarios[x] != null){
-				if(usuarios[x].getNome() == nome){
+				if(usuarios[x].getNome() == nome && usuarios[x].getCpf() == oCep){
 					usuarios[x].setLogado(true);
 					return true;
 				}
@@ -82,7 +82,7 @@ class Biblioteca{
 		for(int x=0;x < livros.Length;x++){
 			if(livros[x] == null){
 				livros[x] = livro;
-				Console.WriteLine("Adicionou");
+				Console.WriteLine("-> Livro Adicionado");
 				break;
 			}	
 		}
@@ -97,6 +97,24 @@ class Biblioteca{
 	}
 		
 	//gravar os livros num txt
+	public void LerLivros(){
+		string varNome;
+		string varGenero;
+		string varAutor;
+		string varFaixa_etaria;
+		FileStream leituraArquivo = new FileStream("dadosLivro.txt",FileMode.Open,FileAccess.Read);
+		
+		
+		StreamReader sr = new StreamReader(leituraArquivo,Encoding.UTF8);
+		/*
+		while(!sr.EndOfStream){
+			string varNome();
+		}
+*/
+		
+		sr.Close();
+		leituraArquivo.Close();
+	}
 	public void GravarLivros(){
 		string variavel;
 		FileStream escritaArquivo = new FileStream("dadosLivro.txt",FileMode.Open,FileAccess.Write);
@@ -124,26 +142,12 @@ class Biblioteca{
 						}
 					}
 				}
-				/*string variavel = sr.ReadLine();
-				while (variavel != string.Empty){
-					sw.WriteLine(variavel);
-				}*/
+			
 			}
 		}
 		sw.Close();
 		escritaArquivo.Close();
-		/*	
-		sr.Close();
-		leituraArquivo.Close();
-		Console.Clear();
-*/
+
 	}
 
-
-	/*
-		FileStream leituraArquivo = new FileStream("dadosLivro.txt",FileMode.Open,FileAccess.Read);
-			
-		StreamReader sr = new StreamReader(leituraArquivo,Encoding.UTF8);
-*/
-	
 }
