@@ -29,6 +29,7 @@ class Livro{
 	public string getNome(){
 		return nome;
 	}
+
 	public void setNome(string n){
 		nome = n;
 	}
@@ -69,20 +70,21 @@ class Livro{
 			return true;
 		}
 		return false;
-
 	}
-	public void MostrarLivros(){
-		FileStream leituraArquivo = new FileStream("dadosLivro.txt",FileMode.Open,FileAccess.Read);
-		
-		StreamReader sr = new StreamReader(leituraArquivo,Encoding.UTF8);
 
+	public void MostrarLivros(){
+
+		FileStream leituraArquivo = new FileStream("dadosLivro.txt",FileMode.Open,FileAccess.Read);		
+		StreamReader sr = new StreamReader(leituraArquivo,Encoding.UTF8);
+		
 		while(!sr.EndOfStream){
-			string str = sr.ReadLine();
+			string str = sr.ReadLine();			
 			Console.WriteLine(str);
 		}
 		sr.Close();
 		leituraArquivo.Close();
 	}
+	
 	public void MostrarDescricao(string nomeLivro, Biblioteca biblio){
 		Console.WriteLine("---------------------------------------");
 		Console.WriteLine("----------Descrição do Livro-----------");
@@ -93,5 +95,5 @@ class Livro{
 		Console.WriteLine("---------------------------------------");
 
 	}
-	
+
 }

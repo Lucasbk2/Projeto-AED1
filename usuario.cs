@@ -9,6 +9,7 @@ class Usuario{
 	private string nome;
 	private int idade;
 	private bool logado;
+	private bool adm;
 	private string cpf;
 	private Livro[] livrosUsuario = new Livro [3];
 
@@ -18,6 +19,23 @@ class Usuario{
 		this.idade = i;
 		this.cpf = c;
 		this.logado = false;
+		this.adm = false;
+	}
+
+	public Usuario(string n, int i, string c,bool a){
+		this.nome = n;
+		this.idade = i;
+		this.cpf = c;
+		this.logado = false;
+		this.adm = a;
+	}
+	
+	public Usuario(string n, int i, string c,bool log, bool a){
+		this.nome = n;
+		this.idade = i;
+		this.cpf = c;
+		this.logado = log;
+		this.adm = a;
 	}
  
 	public Usuario(){
@@ -55,34 +73,50 @@ class Usuario{
 	public void setLogado(bool b){
 		this.logado = b;
 	}
+	
+	public bool getAdm(){
+		return adm;
+	}
+	public void setAdm(bool ad ){
+		this.adm = ad;
+
+	}
+	public Livro[] getLivroUsuario(){
+		return livrosUsuario;
+	}
+
+
 	//Métodos Funcionais
 	public string AlugarLivro(string livroSelecionado, Biblioteca bi){
 		int numLivros = 0;
-		for(int x=0;x<bi.getLivros().Length;x++){
-			if(livroSelecionado == bi.getLivros()[x].getNome()){
-				if (bi.getLivros()[x].VerificarClassificacao(bi.getUsuarioLogado().getIdade()) == false){
-				return "O Usuario não possui idade para alugar este livro";
-				}
-				for(int y=0;y<livrosUsuario.Length;y++){
-					numLivros += 1;
-						if(numLivros == 3){
-							return "O Usuario pode possuir no maximo 3 livros";
-						}
-					if(livrosUsuario[y] == null){
-						
+		for(int x=0; x < bi.getLivros().Length; x++){
+			if(bi.getLivros()[x] != null){
 
-						livrosUsuario[y] = bi.getLivros()[x];
-						bi.getLivros()[x] = null;
-						return "-> Livro Alugado";
+				if(livroSelecionado == bi.getLivros()[x].getNome()){
+
+					if (bi.getLivros()[x].VerificarClassificacao(bi.getUsuarioLogado().getIdade()) == false){
+					return "O Usuario não possui idade para alugar este livro";
 					}
 
-				}
-			}
-				
+					for(int y=0; y < livrosUsuario.Length; y++){ 
+						numLivros += 1;
+
+						if(numLivros > 3){
+							return "O Usuario pode possuir no maximo 3 livros";
+						}
+
+						if(livrosUsuario[y] == null){
+							livrosUsuario[y] = bi.getLivros()[x];
+							bi.getLivros()[x] = null;
+							return "-> Livro Alugado";
+						}
+					}
+				}				
+			}			
 		}
 		return "Livro não adicionado";
 	}
-
+	
 	public void MostrarLivrosUsuario(){
 		for(int x=0;x<livrosUsuario.Length;x++){
 			if(livrosUsuario[x] != null){
@@ -90,21 +124,21 @@ class Usuario{
 			}
 		}
 	}
+
 	public string DevolverLivro(string nomeLivro,Biblioteca bi){
 		for(int x=0;x<livrosUsuario.Length;x++){
-			if(nomeLivro == livrosUsuario[x].getNome()){
-				Console.WriteLine("Livro encontrado");
-				for(int y=0;y<bi.getLivros().Length;y++){
-					if(bi.getLivros()[x] == null){
-						bi.getLivros()[y] =livrosUsuario[x];
-						livrosUsuario[x]=null;
-						return "Livro adicionado";
+			if(livrosUsuario[x] != null){
+				if(nomeLivro == livrosUsuario[x].getNome()){
+					for(int y=0;y<bi.getLivros().Length;y++){
+						if(bi.getLivros()[y] == null){
+							bi.getLivros()[y] = livrosUsuario[x];
+							livrosUsuario[x] = null;
+							return "Livro devolvido a Biblioteca";
+						}
 					}
-				} 
-
+				}
 			}
 		}
-		return "Livro não encontrado";
-
+		return "Livro não devolvido";
 	}
 }
